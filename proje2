@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<style>
+.red {
+  color: red;
+}
+</style>
+<head>
+
+</head>
+<body>
+
+
+<form name="myForm" action="/action_page.php" onsubmit="return validateForm()" method="post">
+  Aşağıdaki hiçbir input boş olmamalı: <br>
+  <h id="Alert" class="red" > </h>
+  
+
+  <table style="width:40%">
+  <tr>
+    <td>Boş olmamalı: </td>
+    <td><input type="text" id="name"></td>
+    <td id="nameAlert" class="red" > </td>
+    
+  </tr>
+  <tr>
+    <td>E-mail (Kurallara uygun email): </td>
+    <td><input type="text" id="email"></td>
+    <td id="emailAlert" class="red" > </td>
+    
+  </tr>
+  <tr>
+    <td>Sadece sayısal: </td>
+    <td><input type="text" id="sayisal"></td>
+    <td id="sayisalAlert" class="red" > </td>
+  </tr>
+  <tr>
+    <td>Sadece sayısal olan ve 12 basamak uzunluğundaki sayi: </td>
+    <td><input type="text" id="basamakli"></td>
+    <td id="basamakliAlert" class="red" > </td>
+  </tr>
+  <tr>
+    <td>Sadece harf (a..z veya A..Z): </td>
+    <td><input type="text" id="alfa"></td>
+    <td id="alfaAlert" class="red" > </td>
+  </tr>
+  <tr>
+    <td>Sadece harf ve en fazla 30 uzunlukta olan string: </td>
+    <td><input type="text" id="max30"></td>
+    <td id="max30Alert" class="red" > </td>
+  </tr>
+  <tr>
+    <td>3 kelimeden oluşan string: </td>
+    <td><input type="text" id="uckelime"></td>
+    <td id="uckelimeAlert" class="red" > </td>
+  </tr>
+  <tr>
+    <td>En az 1 büyük harf, en az 1 küçük harf, en az bir rakam ve en az 1 noktalama işareti içeren ve en az 8 uzunluğunda olan metin: </td>
+    <td><input type="text" id="password"></td>
+    <td id="passwordAlert" class="red" > </td>
+  </tr>
+  
+
+</table>
+
+<br>
+  <input type="submit" value="Submit">
+</form>
+<script>
+function validateForm() {
+	
+	var name = document.getElementById("name").value;
+	var email = document.getElementById("email").value;
+	var sayisal = document.getElementById("sayisal").value;
+	var basamakli = document.getElementById("basamakli").value;
+	var alfa = document.getElementById("alfa").value;
+	var max30 = document.getElementById("max30").value;
+	var uckelime = document.getElementById("uckelime").value;
+	var password = document.getElementById("password").value;
+
+	
+  
+	if (name == "" || email == "" || sayisal == "" ||  basamakli == "" ||  alfa == "" ||  max30 == "" ||  uckelime == "" ||  password  == "") {
+ 
+		document.getElementById("Alert").innerHTML = "(Herhangi bir alan boş olmamalı.)";
+    }
+    else{
+		document.getElementById("Alert").innerHTML = "";
+	}	
+	if (name == ""){
+		document.getElementById("nameAlert").innerHTML = "(Boş olmamalı.)";
+		return false;
+	}
+	else{
+		document.getElementById("nameAlert").innerHTML = "";
+	}
+	if( email.indexOf("@")== 0 ||email.indexOf("@")+1>=email.lastIndexOf(".") || email.lastIndexOf(".")+1>=email.length){
+		
+		document.getElementById("emailAlert").innerHTML = "(ozgun.yilmaz@ege.edu.tr  şeklinde bir mail adresi giriniz.)";
+		return false;
+	}
+	else{
+		document.getElementById("emailAlert").innerHTML = "";
+	}
+	if(isNaN(sayisal) || sayisal == "" ){
+		document.getElementById("sayisalAlert").innerHTML = "(Sadece sayısal)";
+		return false;
+	}
+	else{
+		document.getElementById("sayisalAlert").innerHTML = "";
+	}
+	if(isNaN(basamakli) || basamakli.length != 12 ){
+		document.getElementById("basamakliAlert").innerHTML = "(Sadece sayısal olan ve 12 basamak uzunluğundaki sayı)";
+		return false;
+	}
+	else{
+		document.getElementById("basamakliAlert").innerHTML = "";
+	}
+	for (var i = alfa.length - 1; i >= 0; i--) {
+
+		if(!isNaN(alfa[i])){
+		document.getElementById("alfaAlert").innerHTML = "(Sadece harf (a..z veya A..Z))";
+		return false;
+		}
+		else{
+		document.getElementById("alfaAlert").innerHTML = "";
+		}
+		
+	}
+	if (max30.length > 30 || max30=="") {
+		document.getElementById("max30Alert").innerHTML = "(Sadece harf ve en fazla 30 uzunlukta olan string)";
+		return false;
+	}
+	for (var i = max30Alert.length - 1; i >= 0; i--) {
+		if(!isNaN(max30[i]) || max30.length > 30 || max30==""){
+		document.getElementById("max30Alert").innerHTML = "(Sadece harf ve en fazla 30 uzunlukta olan string)";
+		return false;
+		}
+		else{
+		document.getElementById("max30Alert").innerHTML = "";
+		}
+	}
+	
+	uckelime = uckelime.trim();
+	if(uckelime.includes("  ")){
+
+		document.getElementById("uckelimeAlert").innerHTML = "(Kelimeler arasına tek boşluk bırakınız.)"
+		return false;
+	}
+	if (uckelime.split(" ").length != 3){
+		document.getElementById("uckelimeAlert").innerHTML = "(3 kelimeden oluşan string)";
+		return false;
+	}
+	else{
+		document.getElementById("uckelimeAlert").innerHTML = "";
+	}
+
+	var x = document.querySelector("#name").value;
+  	if (x == "") {
+    alert("Name must be filled out");
+    return false;
+  	}
+  	else{
+  		alert("Herhangi bir alan boş olmamalı.");
+    	return false;
+  	} 
+  
+
+}
+</script>
+</body>
+</html>
